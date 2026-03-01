@@ -1,0 +1,257 @@
+{
+  "exportDataType": 0,
+  "executeSemanticQueryRequest": {
+    "version": "1.0.0",
+    "queries": [
+      {
+        "Query": {
+          "Commands": [
+            {
+              "SemanticQueryDataShapeCommand": {
+                "Query": {
+                  "Version": 2,
+                  "From": [
+                    {
+                      "Name": "c",
+                      "Entity": "Calendario",
+                      "Type": 0
+                    },
+                    {
+                      "Name": "p",
+                      "Entity": "Precios reuters diarios",
+                      "Type": 0
+                    }
+                  ],
+                  "Select": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "c"
+                          }
+                        },
+                        "Property": "Annio"
+                      },
+                      "Name": "Calendario.Annio",
+                      "NativeReferenceName": "Año"
+                    },
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "c"
+                          }
+                        },
+                        "Property": "Mes"
+                      },
+                      "Name": "Calendario.Mes",
+                      "NativeReferenceName": "Mes"
+                    },
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "c"
+                          }
+                        },
+                        "Property": "Fecha"
+                      },
+                      "Name": "Calendario.Fecha",
+                      "NativeReferenceName": "Fecha"
+                    },
+                    {
+                      "Aggregation": {
+                        "Expression": {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "p"
+                              }
+                            },
+                            "Property": "PRECIO"
+                          }
+                        },
+                        "Function": 1
+                      },
+                      "Name": "Avg(Precios reuters diarios.PRECIO)",
+                      "NativeReferenceName": "PRECIO1"
+                    },
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "p"
+                          }
+                        },
+                        "Property": "PRODUCTO"
+                      },
+                      "Name": "Precios reuters diarios.PRODUCTO",
+                      "NativeReferenceName": "PRODUCTO"
+                    }
+                  ],
+                  "Where": [
+                    {
+                      "Condition": {
+                        "And": {
+                          "Left": {
+                            "Comparison": {
+                              "ComparisonKind": 2,
+                              "Left": {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "c"
+                                    }
+                                  },
+                                  "Property": "Fecha"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "datetime'2016-08-26T00:00:00'"
+                                }
+                              }
+                            }
+                          },
+                          "Right": {
+                            "Comparison": {
+                              "ComparisonKind": 3,
+                              "Left": {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "c"
+                                    }
+                                  },
+                                  "Property": "Fecha"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "datetime'2026-02-28T00:00:00'"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "Condition": {
+                        "In": {
+                          "Expressions": [
+                            {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "p"
+                                  }
+                                },
+                                "Property": "PRODUCTO"
+                              }
+                            }
+                          ],
+                          "Values": [
+                            [
+                              {
+                                "Literal": {
+                                  "Value": "'Tela Cruda De Algodón'"
+                                }
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "OrderBy": [
+                    {
+                      "Direction": 1,
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Source": "c"
+                            }
+                          },
+                          "Property": "Annio"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "Binding": {
+                  "Primary": {
+                    "Groupings": [
+                      {
+                        "Projections": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "Subtotal": 0
+                      }
+                    ]
+                  },
+                  "DataReduction": {
+                    "Primary": {
+                      "Top": {
+                        "Count": 1000000
+                      }
+                    },
+                    "Secondary": {
+                      "Top": {
+                        "Count": 100
+                      }
+                    }
+                  },
+                  "Version": 1
+                }
+              }
+            },
+            {
+              "ExportDataCommand": {
+                "Columns": [
+                  {
+                    "QueryName": "Calendario.Annio",
+                    "Name": "Año"
+                  },
+                  {
+                    "QueryName": "Calendario.Mes",
+                    "Name": "Mes"
+                  },
+                  {
+                    "QueryName": "Calendario.Fecha",
+                    "Name": "Fecha"
+                  },
+                  {
+                    "QueryName": "Avg(Precios reuters diarios.PRECIO)",
+                    "Name": "Average of PRECIO"
+                  },
+                  {
+                    "QueryName": "Precios reuters diarios.PRODUCTO",
+                    "Name": "PRODUCTO"
+                  }
+                ],
+                "Ordering": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4
+                ],
+                "FiltersDescription": "Applied filters:\nFecha is on or after 26/08/2016 and is before 28/02/2026\nPRODUCTO is Tela Cruda De Algodón"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "cancelQueries": [],
+    "modelId": 6878420,
+    "userPreferredLocale": "en-US"
+  },
+  "artifactId": 7409419
+}
