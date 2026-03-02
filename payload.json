@@ -108,7 +108,7 @@
                               },
                               "Right": {
                                 "Literal": {
-                                  "Value": "datetime'2016-08-26T00:00:00'"
+                                  "Value": "datetime'2025-12-01T00:00:00'"
                                 }
                               }
                             }
@@ -128,11 +128,38 @@
                               },
                               "Right": {
                                 "Literal": {
-                                  "Value": "datetime'2026-02-28T00:00:00'"
+                                  "Value": "datetime'2025-12-31T00:00:00'"
                                 }
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    {
+                      "Condition": {
+                        "In": {
+                          "Expressions": [
+                            {
+                              "Column": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "p"
+                                  }
+                                },
+                                "Property": "DEPARTAMENTO"
+                              }
+                            }
+                          ],
+                          "Values": [
+                            [
+                              {
+                                "Literal": {
+                                  "Value": "'Nacional'"
+                                }
+                              }
+                            ]
+                          ]
                         }
                       }
                     },
@@ -155,7 +182,7 @@
                             [
                               {
                                 "Literal": {
-                                  "Value": "'Tela Cruda De Algodón'"
+                                  "Value": "'Maíz Amarillo Nacional'"
                                 }
                               }
                             ]
